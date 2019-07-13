@@ -3,7 +3,7 @@
 [Download the APK](https://github.com/5haw4/RegisterAndUploadAndroid/raw/master/RegisterAndUpload.apk)
 
 Fully working android example app, showcasing the functionality of my [RegisterAndUpload]() fullstack project.
-In the app you will be able login / register and then create posts and browse through other users' posts, you can also upload an image with your post if you wish.
+In the app you will be able to login / register and then create posts and browse through other users' posts, you can also upload an image with your post if you wish.
 
 # Please note:
 All your posts and images are publicly visible to ALL app / website visitors.
