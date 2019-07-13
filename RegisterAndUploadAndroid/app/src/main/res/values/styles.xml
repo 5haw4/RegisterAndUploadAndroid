@@ -1,0 +1,38 @@
+<resources>
+
+    <!-- Dark application theme -->
+    <style name="AppThemeDark" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">#DEDEDE</item>
+        <item name="colorPrimaryDark">#212121</item> <!-- color for the status bar -->
+        <item name="colorAccent">#868686</item>
+
+        <item name="colorTitle">#DEDEDE</item>
+        <item name="colorSubTitle">#CDCDCD</item>
+        <item name="colorHintText">#999999</item>
+
+        <item name="colorBackground">#303030</item>
+        <item name="colorBackgroundDark">#212121</item>
+        <item name="colorMiniPlayerBackground">#111111</item>
+
+        <item name="iconsTint">#FFFFFF</item>
+        <item name="colorProgressBar">#868686</item>
+
+        <item name="colorToolbarBackground">#212121</item>
+        <item name="colorToolbarText">#FFFFFF</item>
+
+
+        <item name="cardColorTitle">#212121</item>
+        <item name="cardColorSubtitle">#303030</item>
+        <item name="cardColorProgressBar">#212121</item>
+
+
+    </style>
+
+    <!-- Toolbar theme -->
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@android:color/white</item> <!-- color of the back btn arrow icon -->
+    </style>
+
+
+</resources>

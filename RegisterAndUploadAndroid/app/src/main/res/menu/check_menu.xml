@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/ok_btn"
+        android:title="Ok"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_check_white_24dp"/>
+
+</menu>

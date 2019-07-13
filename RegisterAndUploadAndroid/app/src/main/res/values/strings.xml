@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RegisterAndUpload</string>
+    <string name="user_key">user-key</string>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CTAppTheme">
+        <attr name="colorPrimary" format="color"/>
+        <attr name="colorPrimaryDark" format="color"/>
+        <attr name="colorAccent" format="color"/>
+
+        <attr name="colorTitle" format="color"/>
+        <attr name="colorSubTitle" format="color"/>
+        <attr name="colorHintText" format="color"/>
+
+        <attr name="colorBackground" format="color"/>
+        <attr name="colorBackgroundDark" format="color"/>
+        <attr name="colorMiniPlayerBackground" format="color"/>
+
+        <attr name="iconsTint" format="color"/>
+        <attr name="colorProgressBar" format="color"/>
+
+        <attr name="colorToolbarBackground" format="color"/>
+        <attr name="colorToolbarText" format="color"/>
+
+        <attr name="cardColorTitle" format="color"/>
+        <attr name="cardColorSubtitle" format="color"/>
+        <attr name="cardColorProgressBar" format="color"/>
+
+
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/create_post_btn"
+        android:title="Create New Post"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_add_white_24dp"/>
+
+</menu>
