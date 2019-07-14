@@ -1,6 +1,6 @@
 # RegisterAndUploadAndroid
 
-![Screenshot_1](https://github.com/5haw4/RegisterAndUploadAndroid/blob/master/1.png) ![Screenshot_2](https://github.com/5haw4/RegisterAndUploadAndroid/blob/master/2.png)
+![Screenshot_1](https://github.com/5haw4/RegisterAndUploadAndroid/blob/master/Screenshot_1.png) ![Screenshot_2](https://github.com/5haw4/RegisterAndUploadAndroid/blob/master/Screenshot_2.png)
 
 [Check Out the Web Project](https://github.com/5haw4/RegisterAndUploadWeb)
 
