@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -207,11 +208,21 @@ public class CreatePostActivity extends AppCompatActivity {
                 @Override
                 public void onConversionFinished(String image) {
                     imgStr[0] = image;
-                    createPostRunnable.run();
+                    /*
+                        using AsyncTask to prevent the UI from lagging when creating
+                        Retrofit's "Call" object (which may contain few mbs of an
+                        image in a string base64 format)
+                     */
+                    AsyncTask.execute(createPostRunnable);
                 }
             });
         } else {
-            createPostRunnable.run();
+            /*
+                using AsyncTask to prevent the UI from lagging when creating
+                Retrofit's "Call" object (which may contain few mbs of an
+                image in a string base64 format)
+            */
+            AsyncTask.execute(createPostRunnable);
         }
 
     }
