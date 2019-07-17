@@ -1,8 +1,8 @@
 # RegisterAndUploadAndroid
 
-![Screenshot_1](https://github.com/5haw4/RegisterAndUploadAndroid/blob/master/Screenshot_1.png) ![Screenshot_2](https://github.com/5haw4/RegisterAndUploadAndroid/blob/master/Screenshot_2.png)
+[Download the Android App](https://github.com/5haw4/RegisterAndUploadAndroid/raw/master/RegisterAndUpload.apk) • [Check Out the Web Project and Visit the Live Demo Website](https://github.com/5haw4/RegisterAndUploadWeb)
 
-[Check Out the Web Project](https://github.com/5haw4/RegisterAndUploadWeb)
+![Screenshot_1](https://github.com/5haw4/RegisterAndUploadAndroid/blob/master/Screenshot_1.png) ![Screenshot_2](https://github.com/5haw4/RegisterAndUploadAndroid/blob/master/Screenshot_2.png)
 
 Fully working android example app, showcasing the functionality of the Rest Api of my [RegisterAndUploadWeb](https://github.com/5haw4/RegisterAndUploadWeb) fullstack project.
 In the app you will be able to login / register and then create posts and browse through other users' posts, you can also upload an image with your post if you wish.
