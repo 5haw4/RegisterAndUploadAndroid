@@ -62,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setTitle("Login / Register");
 
+        /*
+            deteting if came to this activity because it was the first screen to be created when the app started,
+            or
+            because the user isn't logged in and they were transfered to this activity from the feed activity
+        */
         if(getIntent() != null && getIntent().getExtras() != null) {
             onLoginGoToPrevActivity = getIntent().getExtras().getBoolean("show_back_arrow");
             if(onLoginGoToPrevActivity) {
@@ -69,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        /*
+            finding the views from the activity's XML file
+        */
         mainLoginLayout = findViewById(R.id.main_login_layout);
         loadingLayout = findViewById(R.id.loading_layout);
 
@@ -85,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         titleTV = findViewById(R.id.title_tv);
         skipTV = findViewById(R.id.skip_btn);
 
+        /* hiding the keyboard when the user start scrolling */
         scrollViewMainChild = findViewById(R.id.scroll_view_main_child);
         scrollViewMainChild.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -93,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        /* startiong the login / register action when the user clicks the "GO" button on the keyboard */
         passET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -100,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        /* switching between "login" and "register" states */
         switchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
                 ChangeVisibilityOfLayouts(true);
             }
         });
+
+        /* starting the login / register action when the user clicks the OK button */
         actionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /* skipping the login phase when the user clicks the skip button */
         skipTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,9 +139,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //trying to validate the logged in user with its token and user Id, in order to skip the login screen
         ValidateUserKey();
     }
 
+    /* handeling the "back" button click on the toolbar */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -134,6 +152,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /*
+        trying to validate the logged in user with its token and user Id, in order to skip the login screen
+    */
     private void ValidateUserKey(){
         String userKey = General.GetUserKey(context);
 
@@ -183,6 +204,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /*
+        creating retrofit's "call" object with the required endpoint depending on the current state
+    */
     private void PerformAction(){
         General.hideSoftKeyboard((Activity) context);
 
@@ -213,6 +237,9 @@ public class MainActivity extends AppCompatActivity {
         RegisterLogin(call);
     }
 
+    /*
+        starting the login / register action by sending the info to the server
+    */
     private void RegisterLogin(Call<ResponseBody> call){
         isLoadingData = true;
         ChangeVisibilityOfLayouts(false);
@@ -253,6 +280,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /*
+        starting up the feed activity after the user logged in / registered / has been
+        validated from the tokne from the last time they logged in
+    */
     private void GoToFeedActivity(User user){
         Intent intent = new Intent(context, FeedActivity.class);
         if(user != null) {
@@ -270,6 +301,9 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    /*
+        switching the layout between the login state and the register state
+    */
     private void ChangeVisibilityOfLayouts(boolean switchingLayout){
         if(switchingLayout) {
             int newVisibitily = isLoginState ? View.VISIBLE : View.GONE;

@@ -74,16 +74,22 @@ public class FeedActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setTitle("Feed");
 
+        // Getting the user info from the bundle of the intent that opened this activity
         if(getIntent() != null && getIntent().getExtras() != null) {
             Gson gson = new GsonBuilder().create();
             user = gson.fromJson(getIntent().getExtras().getString("user"), User.class);
         }
 
+        // finding the views from the activity's XML file
         swipeLayout = findViewById(R.id.swipe_layout);
         messageTV = findViewById(R.id.message_tv);
         loadingLayout = findViewById(R.id.loading_layout);
         listView = findViewById(R.id.list_view);
 
+        /*
+            setting scroll listener to detect when the user reaches the bottom of the feed list in
+            order to load more content for the user to interact with
+        */
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView absListView, int i) {
@@ -103,6 +109,7 @@ public class FeedActivity extends AppCompatActivity {
             }
         });
 
+        // setting the refresh action for the "swipe to refresh" library
         swipeLayout.setListViewChild(listView);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -111,9 +118,14 @@ public class FeedActivity extends AppCompatActivity {
             }
         });
 
+        //loading the first few posts of the feed
         LoadFeed(true);
     }
 
+    /*
+        handeling the callback intents that indicate if the feed should be refreshed,
+        and if the user info has been updated
+    */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -135,6 +147,7 @@ public class FeedActivity extends AppCompatActivity {
         }
     }
 
+    /* inflating the custom options menu for the toolbar */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = ((Activity) context).getMenuInflater();
@@ -142,6 +155,7 @@ public class FeedActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /* handeling the toolbar "create new post" button */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.create_post_btn) {
@@ -152,6 +166,10 @@ public class FeedActivity extends AppCompatActivity {
     }
 
 
+    /*
+        - loading the next few posts of the feed
+        - if "isRefreshing" is true reseting the offset back to 0 to start and load the posts from the start
+    */
     public void LoadFeed(final boolean isRefreshing){
         if(isLoadingData)
             return;
@@ -277,6 +295,11 @@ public class FeedActivity extends AppCompatActivity {
     }
 
 
+    /*
+        opening the "create post" activityt and passing it the user info object,
+        if the user isn't logged in, preventing them from going to the "create post" activity
+        and promping them to register / login with a button that can direct thme to the login screen
+    */
     private void GoToCreatePostActivity() {
         if (user == null) {
             new AlertDialog.Builder(context)

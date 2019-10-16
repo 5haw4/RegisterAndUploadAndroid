@@ -69,21 +69,33 @@ public class CreatePostActivity extends AppCompatActivity {
         context = this;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //enabling the back button in the toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //setting toolbar title
         setTitle("Create New Post");
 
+        //getting the logged in user's data from the bundle of the intent that opened this activity
         if(getIntent() != null && getIntent().getExtras() != null) {
             Gson gson = new GsonBuilder().create();
             user = gson.fromJson(getIntent().getExtras().getString("user"), User.class);
         }
 
+        //finidng all the views from the activity's XML file
         inputLayoutDescription = findViewById(R.id.input_layout_description);
         descET = findViewById(R.id.desc_et);
         imagePreview = findViewById(R.id.image_preview);
         addImageBtn = findViewById(R.id.add_image_btn);
         removeImageBtn = findViewById(R.id.remove_image_btn);
+        //disabling the "remove image" button, because an image hasn't been selected yet
         removeImageBtn.setEnabled(false);
+        //greying out the drawable (icon) of the button, because when the button is disabled it
+        //doesn't automatically change the drawable's color to grey (to indicate that the button is disabled)
         General.ChangeButtonDrawbleColor(context, removeImageBtn, android.R.color.darker_gray);
+
+        /*
+        * Setting the click listeners for the "add image" button, and for the
+        * "remove image" button
+        */
 
         addImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +107,7 @@ public class CreatePostActivity extends AppCompatActivity {
         removeImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //removing the selected image so it won't be uploaded with the post
                 imagePreview.setImageBitmap(null);
                 removeImageBtn.setEnabled(false);
                 General.ChangeButtonDrawbleColor(context, removeImageBtn, android.R.color.darker_gray);
@@ -102,10 +115,15 @@ public class CreatePostActivity extends AppCompatActivity {
         });
     }
 
+    /*
+    * Handeling with the selection of images from the device's photo app, as well as handeling
+    * with the photo that's just been taken with the camera
+    */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && data != null) {
+            //handeling the picture that's been taken with the camera
             if (requestCode == CAPTURE_IMAGE_REQUEST_CODE && data.getExtras() != null) {
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 if (bitmap != null) {
@@ -114,7 +132,9 @@ public class CreatePostActivity extends AppCompatActivity {
                     removeImageBtn.setEnabled(true);
                     General.ChangeButtonDrawbleColor(context, removeImageBtn, android.R.color.black);
                 }
-            } else if (requestCode == PICK_IMAGE_REQUEST_CODE && data.getData() != null) {
+            } else
+                //handeling the picture that's been selected from the device's photo app
+                if (requestCode == PICK_IMAGE_REQUEST_CODE && data.getData() != null) {
                 Uri targetUri = data.getData();
                 Bitmap bitmap;
                 try {
@@ -130,6 +150,10 @@ public class CreatePostActivity extends AppCompatActivity {
         }
     }
 
+    /*
+        inflating the custom toolbar options menu, which contains
+        only the "OK" button for creating the post
+    */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = ((Activity) context).getMenuInflater();
@@ -137,12 +161,15 @@ public class CreatePostActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            //user clicked on the "OK" button to upload the post
             case R.id.ok_btn:
                 CreatePost();
                 break;
+            //user clicked the toolbar "back" / "home" button
             case android.R.id.home:
                 FinishActivity(false);
                 break;
@@ -156,6 +183,11 @@ public class CreatePostActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    /*
+        Creating and uploading the post to the server
+            first converting the bitmap object to string (only if an image was selected)
+            then finally uploading the image string and the text to the server using retrofit library
+    */
     private void CreatePost(){
         final ProgressDialog dialog = ProgressDialog.show(context, "Creating post","Please Wait...", true);
 
@@ -227,6 +259,10 @@ public class CreatePostActivity extends AppCompatActivity {
 
     }
 
+    /*
+        Creating and showing the custom layout inside an alert dialog, to let the user
+        choose if they want to select an image from the photo app or capture one instead
+    */
     private void OpenAddImageAlert(){
 
         final Dialog dialog = new Dialog(context);
@@ -267,6 +303,10 @@ public class CreatePostActivity extends AppCompatActivity {
 
     }
 
+    /*
+        before finishing the activity adding to the intent a boolean that states if the feed
+        should be refreshed or not (if the user has uploaded a post it should refresh, otherwise it shouldn't)
+    */
     private void FinishActivity(boolean refreshFeed){
         Intent returnIntent = new Intent();
         returnIntent.putExtra("refresh_feed", refreshFeed);

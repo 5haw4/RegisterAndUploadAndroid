@@ -8,6 +8,10 @@ import retrofit2.http.POST;
 
 public interface UsersApi {
 
+    /**
+     * ENDPOINTS FOR THE USERS API
+     * */
+
     String API_PATH = "users.php/";
 
     @FormUrlEncoded

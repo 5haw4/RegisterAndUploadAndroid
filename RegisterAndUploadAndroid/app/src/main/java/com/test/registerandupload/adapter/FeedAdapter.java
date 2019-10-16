@@ -79,11 +79,13 @@ public class FeedAdapter extends ArrayAdapter<Post> {
             vh = (ViewHolder) convertView.getTag();
         }
 
+        // setting the texts from the current post object
         vh.usernameTV.setText(Html.fromHtml(post.getCreatorUsername()));
         vh.timeAgoTV.setText(post.getCreationTime());
         vh.descTV.setVisibility(post.getDescription().isEmpty() ? View.GONE : View.VISIBLE);
         vh.descTV.setText(Html.fromHtml(post.getDescription()));
 
+        // setting the click listener for deleting the post
         vh.deleteBtn.setVisibility(post.didUserCreatePost() ? View.VISIBLE : View.GONE);
         vh.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +94,7 @@ public class FeedAdapter extends ArrayAdapter<Post> {
             }
         });
 
+        //loading the current post's image with the picasso library
         final ViewHolder finalVH = vh;
         if(!post.getImageUrl().isEmpty()) {
             picasso.load(post.getImageUrl()).error(R.drawable.ic_broken_image_black_64dp)
@@ -123,6 +126,7 @@ public class FeedAdapter extends ArrayAdapter<Post> {
         ProgressBar imageProgressBar;
     }
 
+    //opening the alert dialog for when the user tries to delete the current post
     private void OpenDeleteAlert(final String postId, final int position){
         new AlertDialog.Builder(context)
                 .setTitle("Are you sure?")
@@ -137,6 +141,7 @@ public class FeedAdapter extends ArrayAdapter<Post> {
                 .show();
     }
 
+    //performing the delete action of the current post
     private void DeletePost(String postId, final int position){
         final ProgressDialog deleteDialog = ProgressDialog.show(context, "Deleting post","Please Wait...", true);
 

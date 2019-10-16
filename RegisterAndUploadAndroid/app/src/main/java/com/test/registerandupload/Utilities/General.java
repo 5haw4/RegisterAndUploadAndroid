@@ -21,6 +21,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class General {
 
+    //hiding the keyboard
     public static void hideSoftKeyboard(Activity activity) {
         if (activity != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(INPUT_METHOD_SERVICE);
@@ -32,17 +33,20 @@ public class General {
         }
     }
 
+    //saving the user key (token) in shared prefs
     public static void SetUserKey(Context context, String userKey){
         SharedPreferences.Editor editor = context.getSharedPreferences(context.getString(R.string.user_key), MODE_PRIVATE).edit();
         editor.putString(context.getString(R.string.user_key), userKey);
         editor.apply();
     }
 
+    //getting the user key (token) from the shared prefs
     public static String GetUserKey(Context context){
         SharedPreferences prefs = context.getSharedPreferences(context.getString(R.string.user_key), MODE_PRIVATE);
         return prefs.getString(context.getString(R.string.user_key), "");
     }
 
+    //creating an alert dialog with the given title and message (used for error and success messages across the app)
     public static void CreateAlertDialog(Context context, String title, String msg){
         new AlertDialog.Builder(context)
                 .setTitle(title)
@@ -51,6 +55,7 @@ public class General {
                 .show();
     }
 
+    //changing the button's drawable (icon) color
     public static void ChangeButtonDrawbleColor(Context context, Button btn, int newColor) {
         Drawable[] removeBtnDrawables = btn.getCompoundDrawables();
         removeBtnDrawables[0].setColorFilter(context.getResources().getColor(newColor), PorterDuff.Mode.SRC_ATOP);

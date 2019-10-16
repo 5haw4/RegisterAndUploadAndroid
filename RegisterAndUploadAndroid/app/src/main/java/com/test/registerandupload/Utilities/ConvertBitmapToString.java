@@ -9,6 +9,11 @@ import com.test.registerandupload.interfaces.BitmapToStringCallback;
 
 import java.io.ByteArrayOutputStream;
 
+
+/*
+    Handeling the convertion of the bitmap to a string
+*/
+
 public class ConvertBitmapToString {
 
     public void setBitmapToStringCallback(Bitmap bitmap, int quality, BitmapToStringCallback bitmapToStringCallback){

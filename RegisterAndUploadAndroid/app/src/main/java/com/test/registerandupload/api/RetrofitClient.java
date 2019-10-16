@@ -24,6 +24,7 @@ public class RetrofitClient {
     private static RetrofitClient Instance;
     private Retrofit retrofit;
 
+    //handeling the initilizition of the retrofit object
     private RetrofitClient() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(20, TimeUnit.SECONDS)
